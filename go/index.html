@@ -6,26 +6,26 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="referrer" content="no-referrer">
 <title>Julieta Rodríguez</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%23f0eae0'/%3E%3Ctext x='32' y='41' font-family='Georgia,serif' font-size='24' text-anchor='middle' fill='%23181410'%3EJR%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Italiana&family=Archivo:wght@400;500&display=swap">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23b4382b'/%3E%3Ctext x='32' y='46' font-family='Didot,Georgia,serif' font-weight='700' font-size='38' text-anchor='middle' fill='%23fff'%3EJ%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,900;1,6..96,400&family=Manrope:wght@400;600&display=swap">
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
-  html,body{height:100%;background:#f0eae0}
-  body{color:#181410;font-family:"Archivo",system-ui,sans-serif;-webkit-font-smoothing:antialiased;display:flex;align-items:center;justify-content:center;padding:24px}
-  .card{width:100%;max-width:360px;text-align:center;border:1px solid rgba(24,20,16,.16);background:#f8f3ea;padding:36px 24px}
-  .mono{width:52px;height:52px;margin:0 auto 18px;border:1px solid rgba(24,20,16,.32);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:"Italiana",serif;font-size:1.15rem;letter-spacing:.08em}
-  h1{font-family:"Italiana",serif;font-weight:400;font-size:1.7rem;line-height:1.1}
-  p{margin-top:10px;font-size:.86rem;line-height:1.5;color:#7c7160}
-  .guide{display:none;margin-top:22px;border-top:1px solid rgba(24,20,16,.16);padding-top:20px}
+  html,body{height:100%;background:#f6f1ea}
+  body{color:#1d1714;font-family:"Manrope",system-ui,sans-serif;-webkit-font-smoothing:antialiased;display:flex;align-items:center;justify-content:center;padding:24px}
+  .card{width:100%;max-width:360px;text-align:center;border-top:2px solid #1d1714;border-bottom:2px solid #1d1714;padding:34px 8px}
+  .m{font-family:"Bodoni Moda",Georgia,serif;font-weight:900;font-size:3rem;line-height:.9;letter-spacing:-.03em}
+  h1{font-family:"Bodoni Moda",Georgia,serif;font-style:italic;font-weight:400;font-size:1.4rem;margin-top:14px}
+  p{margin-top:8px;font-size:.86rem;line-height:1.5;color:#6f645c}
+  .guide{display:none;margin-top:22px;border-top:1px solid rgba(29,23,20,.18);padding-top:20px}
   .guide.on{display:block}
-  .guide b{display:block;font-weight:500;font-size:.9rem;color:#181410}
-  .btn{display:block;margin-top:16px;padding:14px 16px;background:#181410;color:#f0eae0;text-decoration:none;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase}
-  .fb{display:inline-block;margin-top:18px;font-size:.75rem;color:#7c7160}
+  .guide b{display:block;font-weight:600;font-size:.9rem}
+  .btn{display:block;margin-top:16px;padding:15px 16px;background:#1d1714;color:#f6f1ea;text-decoration:none;font-size:.7rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase}
+  .fb{display:inline-block;margin-top:18px;font-size:.75rem;color:#6f645c}
 </style>
 </head>
 <body>
 <div class="card" role="status" aria-live="polite">
-  <div class="mono">JR</div>
+  <div class="m">JULIETA</div>
   <h1>Opening…</h1>
   <p>One moment, taking you there.</p>
   <div class="guide" id="guide">
@@ -37,12 +37,14 @@
 </div>
 <script>
 (function(){
-  // Same in-app escape as PicLink /go (GoRedirect.tsx), standalone: no remote
-  // config, no PicLink calls. Android → intent:// Chrome; iOS Instagram/Threads →
-  // extbrowser scheme; other in-app → guided overlay; normal browser → redirect.
-  // Mismo escape que /go de PicLink, sin depender de PicLink.
+  // Same in-app escape as PicLink /go (GoRedirect.tsx), standalone.
+  // ?to=<key> resolves a named destination so the home page HTML never contains it.
+  // Mismo escape que /go de PicLink. ?to=<clave> resuelve un destino con nombre
+  // para que el HTML de la portada nunca lo contenga.
+  var NAMED={members:['https://','only','fans.com','/julirodriguezok/c125'].join('')};
   var ALLOW=/(^|\.)(instagram\.com|tiktok\.com|t\.me|telegram\.me|x\.com|twitter\.com|onlyfans\.com|fanvue\.com)$/i;
-  var raw=new URLSearchParams(location.search).get('url')||'';
+  var q=new URLSearchParams(location.search);
+  var raw=NAMED[q.get('to')]||q.get('url')||'';
   var url='/';
   try{var u=new URL(raw);if((u.protocol==='https:'||u.protocol==='http:')&&ALLOW.test(u.hostname))url=u.href;}catch(e){}
   document.getElementById('fb').href=url;
