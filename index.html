@@ -14,15 +14,14 @@
 <meta name="theme-color" content="#efe8df">
 <link rel="canonical" href="https://julirodriguez.me/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%23171310'/%3E%3Ctext x='32' y='41' font-family='Arial Black,Arial,sans-serif' font-weight='900' font-size='22' text-anchor='middle' fill='%23efe8df'%3EJR%3C/text%3E%3C/svg%3E">
-<link rel="preload" as="image" href="img/cut-g2.png">
+<link rel="preload" as="image" href="img/g2.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap">
 <style>
-  /* Studio campaign concept: subject cut-out over light paper, giant name behind her,
+  /* Studio campaign concept: full-bleed photo cover, giant name,
      sticky chat CTA, scroll-driven motion. One family (Archivo, variable width).
-     Concepto campaña de estudio: figura recortada sobre fondo claro, nombre gigante
-     detrás, CTA de chat fijo, movimiento con el scroll. Una sola familia tipográfica. */
+     Concepto campaña de estudio: portada con foto, nombre grande, CTA de chat fijo, movimiento con el scroll. Una sola familia tipográfica. */
   *{margin:0;padding:0;box-sizing:border-box}
   html{background:#efe8df;scroll-behavior:smooth}
   body{
@@ -35,18 +34,21 @@
   .x{font-stretch:125%;font-weight:800;text-transform:uppercase;letter-spacing:-.02em}
   .lab{font-size:.66rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
 
-  .hero{position:relative;height:100vh;height:100svh;min-height:620px;overflow:hidden;
-    background:radial-gradient(90% 70% at 50% 42%,#faf6f1 0%,#efe8df 55%,#e6ddd2 100%)}
+  /* Photo cover (from the first live version), bottom identity in Archivo.
+     Portada con foto a pantalla completa (de la primera versión), nombre abajo. */
+  .hero{position:relative;height:100vh;height:100svh;min-height:620px;overflow:hidden;background:#211a14}
+  .hero .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform}
+  .hero .pm{object-position:50% 15%}
+  .hero .pd{display:none;object-position:50% 26%}
+  .hero:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,.34) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 48%,rgba(0,0,0,.72) 100%)}
   .top{position:absolute;top:0;left:0;right:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:max(16px,env(safe-area-inset-top)) 18px 0}
-  .top .mk{width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;font-stretch:125%}
-  .top .lab{color:var(--soft)}
-  .name{position:absolute;left:0;right:0;top:15%;z-index:1;text-align:center;font-size:19vw;line-height:.8;color:var(--ink);will-change:transform;white-space:nowrap}
-  .name small{display:block;font-size:.3em;letter-spacing:.28em;font-weight:500;margin-top:.22em;padding-left:.28em;color:var(--soft)}
-  .subj{position:absolute;left:50%;bottom:0;z-index:2;height:94%;width:auto;max-width:none;transform:translateX(-50%);will-change:transform;
-    filter:drop-shadow(0 30px 40px rgba(60,40,25,.18));
-    -webkit-mask-image:linear-gradient(180deg,#000 82%,transparent 100%);mask-image:linear-gradient(180deg,#000 82%,transparent 100%)}
+  .top .mk{width:34px;height:34px;border-radius:50%;background:rgba(247,242,236,.92);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;font-stretch:125%}
+  .top .lab{color:rgba(247,242,236,.9)}
+  .id{position:absolute;left:0;right:0;bottom:84px;z-index:3;text-align:center;color:#f7f2ec;padding:0 18px}
+  .name{font-size:13.5vw;line-height:.86;text-shadow:0 2px 30px rgba(0,0,0,.35)}
+  .name small{display:block;font-size:.42em;letter-spacing:.24em;font-weight:500;margin-top:.3em;padding-left:.24em;color:rgba(247,242,236,.88)}
   .tagline{position:absolute;left:18px;right:18px;bottom:26px;z-index:3;display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
-  .tagline .lab{color:var(--ink);background:rgba(247,242,236,.75);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:8px 12px;border-radius:999px}
+  .tagline .lab{color:var(--ink);background:rgba(247,242,236,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:8px 12px;border-radius:999px}
   .scroll{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;background:rgba(247,242,236,.75);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);animation:bob 2s ease-in-out infinite}
   @keyframes bob{50%{transform:translateY(5px)}}
 
@@ -117,8 +119,6 @@
   .dock .go{flex:none;height:46px;padding:0 18px;border-radius:999px;background:#fff;color:var(--ink);display:flex;align-items:center;gap:6px;font-size:.8rem;font-weight:700}
 
   @media(min-width:900px){
-    .name{font-size:17vw;top:10%}
-    .subj{height:96%}
     .socials{max-width:560px}
     .track figure{width:30vw}
     .end .big{font-size:15vw}
@@ -127,14 +127,16 @@
     .mq .row,.scroll,.ofb,.ofb:before,.ofb .av:after,.ofb .go span{animation:none}
     .say p .w{color:var(--ink)}
   }
+  @media (min-width:900px){.hero .pm{display:none}.hero .pd{display:block}.name{font-size:8vw}}
 </style>
 </head>
 <body>
 
 <header class="hero">
+  <img class="ph pm" id="subj" src="img/g2.jpg" alt="Julieta Rodríguez" fetchpriority="high">
+  <img class="ph pd" src="img/hero-juli-v3.jpg" alt="">
   <div class="top"><span class="mk">JR</span><span class="lab">Mexico City · Worldwide</span></div>
-  <h1 class="name x" id="name">Julieta<small>Rodríguez</small></h1>
-  <img class="subj" id="subj" src="img/cut-g2.png" alt="Julieta Rodríguez" fetchpriority="high">
+  <div class="id"><h1 class="name x" id="name">Julieta<small>Rodríguez</small></h1></div>
   <div class="tagline">
     <span class="lab">Model · TV Host · Creator</span>
     <a class="scroll" href="#links" aria-label="Scroll"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
@@ -216,7 +218,7 @@
     ticking=false;
     var y=scrollY,vh=innerHeight;
     // hero parallax / parallax del hero
-    if(!reduce&&y<vh){name.style.transform='translateY('+(y*.35)+'px)';subj.style.transform='translateX(-50%) translateY('+(y*-.08)+'px) scale('+(1+y/vh*.06)+')';}
+    if(!reduce&&y<vh){name.style.transform='translateY('+(y*-.12)+'px)';name.style.opacity=Math.max(0,1-y/(vh*.45));subj.style.transform='scale('+(1+y/vh*.08)+')';}
     // chat dock shows after scrolling a bit / el CTA aparece al bajar
     var ob=document.getElementById('ofb').getBoundingClientRect();
     dock.classList.toggle('show',ob.bottom<0);
